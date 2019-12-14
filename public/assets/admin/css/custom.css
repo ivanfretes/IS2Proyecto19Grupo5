@@ -1,0 +1,415 @@
+.custom-padding {
+  padding: 20px;
+}
+
+
+/* -- cards --- */
+
+.card-custom {
+  overflow: hidden;
+  min-height: 450px;
+  box-shadow: 0 0 5px rgba(10, 10, 10, 0.3);
+}
+
+.card-custom-img {
+  height: 200px;
+  min-height: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-color: inherit;
+}
+
+/* First border-left-width setting is a fallback */
+.card-custom-img::after {
+  position: absolute;
+  content: '';
+  top: 161px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-top-width: 40px;
+  border-right-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 545px;
+  border-left-width: calc(575px - 5vw);
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: inherit;
+}
+
+.card-custom-avatar img {
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(10, 10, 10, 0.3);
+  position: absolute;
+  top: 100px;
+  left: 1.25rem;
+  width: 100px;
+  height: 100px;
+}
+
+
+/** -- Imagenes de productos -- **/
+
+.producto-img {
+  width: 350px;
+  height: 350px;
+  background: #eaeaea;
+  text-align: center;
+}
+
+
+.producto-img img {
+    object-fit: contain;
+    height: 350px;
+    text-align: center;
+}
+
+.imagen-item-src {
+	object-fit: contain;
+	height: 100px;
+}
+
+#data-result .card {    
+    margin-bottom: 10px;
+}
+
+
+.imagen-container-preview img {
+    object-fit: contain;
+    height: 150px;
+    width: 100%;
+    text-align: center;
+    background: #eaeaea;
+}
+
+/** Relacionado al tabs **/
+
+/* Tabs Card */
+
+.tab-card {
+  border:1px solid #eee;
+}
+
+.tab-card-header {
+  background:none;
+}
+/* Default mode */
+.tab-card-header > .nav-tabs {
+  border: none;
+  margin: 0px;
+}
+
+.tab-card-header > .nav-tabs > li {
+  margin-right: 2px;
+}
+
+.tab-card-header > .nav-tabs > li > a {
+  border: 0;
+  border-bottom:2px solid transparent;
+  margin-right: 0;
+  color: #737373;
+  padding: 2px 15px;
+}
+
+.tab-card-header > .nav-tabs > li > a.show {
+    border-bottom:2px solid #007bff;
+    color: #007bff;
+}
+.tab-card-header > .nav-tabs > li > a:hover {
+    color: #007bff;
+}
+
+.tab-card-header > .tab-content {
+  padding-bottom: 0;
+}
+
+
+/** Summernote **/
+.summernote-not-load {
+  visibility: hidden;
+}
+
+/** Varios **/
+.row-btn-subhead {
+  margin-bottom: 10px;
+}
+
+.btn-row-filter {
+  margin-top: 31px;
+}
+
+
+.imagen-pedido-preview {
+	height: 50px;
+  text-align: center;
+  background: #eaeaea;
+}
+
+.imagen-pedido-preview img {
+  object-fit: contain;
+  height: 100%;
+}
+
+
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#cliente-detalle-map {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 30px;
+  border-top: #444 1px solid;
+  background: #eaeaea;
+}
+ 
+.table-custom{
+  font-size: 12px;
+
+}
+
+
+/**
+  Filter de los tables
+  https://bootsnipp.com/snippets/8G2Q
+**/
+.filterable {
+    margin-top: 15px;
+}
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+.filterable .filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+    font-size:  12px;
+    font-weight: bold;  a
+}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]::-moz-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+    color: #333;
+}
+
+
+.btn-filter {
+  margin: 10px 0px;
+}
+
+/**
+  End filted de los tables
+**/
+
+
+.input_cantidad {
+    width: 130px;
+    border: 0px;
+    border-bottom: 1px solid #444; 
+    text-align: right;
+    font-size: 12px;
+    border-radius: 0px;
+    padding: 10px;
+    margin-right: -20px;
+    background: transparent;
+}
+
+.oi {
+  font-size: 10px;
+  padding: 10px;
+}
+
+.btn-icon  {
+  padding: 2.5px 5px ;
+  font-size: 12px;
+}
+
+.list-group-flush .list-group-item {
+    padding: 5px 20px;
+    font-size: 15px;
+}
+
+
+.select_detalle_servicio {
+    width: 130px;
+    border: 0px;
+    /* border-bottom: 1px solid #444; */
+    text-align: right;
+    font-size: 12px;
+    margin-top: -7.5px;
+    border-radius: 0px;
+    margin-right: -20px;
+    background: #eaeaea;
+}
+
+
+.sin-contenido {
+  padding: 100px;
+  height: 400px;
+}
+
+.requerido {
+  color: red;
+  font-weight: bold
+}
+
+.subtitle-form {
+  padding:  20px 0px;
+  color: red;
+}
+
+#cliente-listado-modal {
+	margin-top: 20px;
+	height: 400px;
+    overflow-y: auto;
+}
+
+
+.btn-aqui {
+  background: #3f51b5;
+  color: #eaeaea;
+  padding: 5px;
+
+}
+
+
+.remove-basic {
+  background: red;
+  color: #fff;
+  padding: 5px;
+  margin : 5 10px; 
+}
+
+.pago-total {
+  padding: 10px;
+}
+
+
+ul.pagination li {
+  padding: 10px;
+  font-size: 12px;
+  
+}
+
+
+.label {
+    display: inline-block;
+    margin-top: .5rem;
+    font-size: 11px;
+}
+
+.f_box_producto_buscado {
+	height: 200px;
+	background: #fff;
+}
+
+
+
+/**
+  Select2 
+**/
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #cad1d7;
+    height: 46px;
+    border-radius: 7px;
+}
+
+
+.div_detalle {
+  height: 200px;
+  overflow-y: scroll;
+  background: #eaeaea;
+  margin: 20px 0px;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+a.nav-link.active {
+    background: #cec8c8;
+}
+
+
+.logo-l {
+  text-decoration: underline;
+}
+
+
+.logo-ambda {
+  color: red;
+}
+
+.header {
+    position: relative;
+    background-image: url(../../../img/bg-header.jpeg) !important;
+    background-position: center bottom !important;
+    background-size: cover !important;
+    background-repeat: no-repeat;
+}
+
+
+label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #444;
+    padding: 0px;
+    margin: 0px;
+}
+
+.form-group {
+    margin-bottom: 0.1rem;
+}
+
+.form-header{
+  
+  padding: 0px;
+}
+
+
+.menu-opciones-form a, .menu-opciones-form button{
+  background: #8293ea;
+  padding: 5px 15px;
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px 1px #444;
+  font-size: 12px;
+  font-weight: bold;
+  color:#fff !important;
+}
+
+
+
+hr {
+  margin: 1rem 0rem  !important;
+  border-top: var(--light) 1px solid;
+}
+
+.hidden-custom {
+  visibility:  hidden;
+  font-size: 0px;
+  height: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+
+.back-page {
+  padding-right: 5px;
+}
+
+
+h6#text-buscado-menu {
+    padding-top: 20px;
+}
+
+.btn-main {
+  margin-bottom: 20px;
+}
