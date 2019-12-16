@@ -5,14 +5,14 @@
 
 ## DEMO
 Usuarios - Password: 123456 - ID
-* jan82@monroy.es - Administracion - 200
-* ramos.ona@hispavista.com - Configuracion - 198
-* iker.roldan@hispavista.com - Desarrollo - 197
-
-
+* 
+* juana64@yahoo.es - Administracion - 3
+* kpantoja@yahoo.com - Configuracion - 4
+* hugo67@live.com - Desarrollo - 1
+* paola.banuelos@terra.com - Super Admin - 5
+  
 ## Migrate
 php artisan migrate
-
 
 ## Seeding
 php artisan make:seeder NombreDelSeeder

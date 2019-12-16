@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Sistema\Configuracion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Item;
+use App\Model\Proyecto;
 
 class ItemController extends Controller
 {
@@ -14,7 +16,12 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $itemList = Item::simplePaginate();
+
+        return view('sistema.item.list', [
+            'itemList' => $itemList,
+            'tituloPagina' => 'Listado de Items'
+        ]);
     }
 
     /**
@@ -24,7 +31,13 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        $item = new Item;
+        $item->nombre = 'Sin nombre';
+        $item->fecha = \Carbon\Carbon::now();
+
+        $item->save();
+
+        return redirect(route('sistema.item.edit', $item->id));
     }
 
     /**
@@ -57,7 +70,26 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::find($id);
+        if (!isset($item)){
+            return abort(404);
+        }
+
+        $proyectoSeleccionado = NULL;
+        $faseSeleccionada = NULL;
+        $lineaBaseSeleccionada = NULL;
+        if (isset($item->lineabase)){
+            $proyectoSeleccionado = $lBase->fase->proyecto;
+            $faseSeleccionada = $lBase->fase;
+        }
+
+        $proyectoList = Proyecto::all();
+
+        return view('sistema.item.edit', [
+            'item' => $item,
+            'proyectoList' => $proyectoList,
+            'tituloPagina' => 'Editar Item'
+        ]);
     }
 
     /**

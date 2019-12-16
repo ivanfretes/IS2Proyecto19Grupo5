@@ -34,6 +34,7 @@ class ProyectoController extends Controller
     {
         $proyecto = new Proyecto;
         $proyecto->nombre = 'Sin titulo';
+        $proyecto->estado = 'abierto';
         $proyecto->fecha_inicio = \Carbon\Carbon::now();
         $proyecto->save();
 

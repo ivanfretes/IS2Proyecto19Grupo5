@@ -37,7 +37,7 @@ function sendForm(settings = {}){
 			},
 			success: function(data){
                 console.log(data);
-
+                	
 				if(data.message != null){
                     $.notify(data.message, "success");
 					

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Administracion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Proyecto;
+use App\User;
 
 class ProyectoController extends Controller
 {
@@ -19,6 +20,41 @@ class ProyectoController extends Controller
     }
 
   
+    /**
+     * Si 
+     * 
+     * @link /{id}/asignar-proyecto
+     */
+    public function asignarProyecto(Request $request, $id){
+        
+        // Verifica si existe el usuario
+        $usuarioId = $request->input('id_usuario', NULL);
+        $usuario = User::find($usuarioId);
+
+
+        // Verfica si el usuario, tiene un proyecto abierto
+        $proyectoAsignado = Proyecto::where('id_usuario', $usuarioId)
+            ->where('estado', 'abierto')
+            ->first();
+
+        if (isset($proyectoAsignado)){
+            return response([
+                'errors' => [
+                    'Usuario no encontrado, o ya se encuentra asignado a otro proyecto'
+                ]
+            ],500);
+        }
+
+        // Buscar el proyecto
+        $proyecto =  Proyecto::find($id);
+        $proyecto->id_usuario = $usuario->id;
+        $proyecto->save();
+
+        return [
+            'data' => $proyecto,
+            'message' => 'Proyecto Asignado correctamente'
+        ];
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -82,6 +118,7 @@ class ProyectoController extends Controller
         }
 
         $proyecto->fecha_fin = $fechaFin;
+        $proyecto->estado = $request->input('estado');
         $proyecto->nombre = urldecode($request->input('nombre'));
         $proyecto->save();
 

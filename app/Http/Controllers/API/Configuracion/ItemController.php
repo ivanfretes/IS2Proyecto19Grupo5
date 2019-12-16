@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API\Configuracion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Item;
+use App\Model\LineaBase;
 
 class ItemController extends Controller
 {
@@ -14,7 +16,11 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::all();
+
+        return [
+            'data' => $items
+        ];
     }
 
     /**
@@ -38,27 +44,7 @@ class ItemController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+  
 
     /**
      * Update the specified resource in storage.
@@ -69,7 +55,38 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Item::find($id);
+        if (!isset($item)){
+            return response([
+                'errors' => [
+                    'Item no encontrado'
+                ]
+            ], 404);
+        }
+
+        $lineaBaseId = $request->input('id_lineabase',NULL);
+        $lineaBase = LineaBase::find($lineaBaseId);
+
+        if (!isset($lineaBase) || $lineaBase->estado != 'abierto'){
+            return response([
+                'errors' => [
+                    'Linea base no esta definida o esta cerrada'
+                ]
+            ], 404);
+        }
+
+        $lineaBase->count();
+        
+
+        $item->nombre = urldecode($request->input('nombre'));
+        $item->descripcion = urldecode($request->input('descripcion'));
+        $item->id_lineabase = $lineaBaseId;
+        $item->save();
+
+        return [
+            'data' => $item,
+            'message' => 'Item editado correctamente'
+        ];
     }
 
     /**
@@ -80,6 +97,19 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::find($id);
+        if (!isset($item)){
+            return response([
+                'errors' => [
+                    'Item no encontrado'
+                ]
+            ], 404);
+        }
+
+        $item->delete();
+        return [
+            'data' => $item,
+            'message' => 'Item eliminado correctamente'
+        ];
     }
 }

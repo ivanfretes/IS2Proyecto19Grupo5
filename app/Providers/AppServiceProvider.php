@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 //use App\Model\Negocio\ServicioTipo;
 //use App\Model\Negocio\Imagen;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -50,6 +51,13 @@ class AppServiceProvider extends ServiceProvider
         // Odontologia
         View::share('examenClinicoList', ['normal', 'alterado']);
         View::share('examenClinicoList2', ['normal', 'gingivitis','periodontitis']);
+
+        Paginator::defaultView('vendor.pagination.bootstrap-4');
+        Paginator::defaultSimpleView('vendor.pagination.simple-bootstrap-4');
+
+
+        View::share('estadosFase', ['abierto', 'bloqueado', 'cerrado']);
+        View::share('estadosAoC', ['abierto', 'cerrado']);
     }
 
     /**

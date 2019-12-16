@@ -18,9 +18,7 @@ class UsuarioController extends Controller
     {
         $usuarioList = User::paginate(20);
 
-        return [
-            "data" => $usuarioList
-        ];
+        return $usuarioList;
     }
 
     /**
@@ -31,6 +29,32 @@ class UsuarioController extends Controller
     public function create()
     {
         //
+    }
+
+
+    /**
+     * Busca un usuario
+     */
+    public function buscar(Request $request){
+        $q = $request->input('q', NULL);
+        if ($q != NULL){
+            $q = strtolower($q);
+
+            $usuarioList = User::where(function($query) use ($q)
+            {   
+                $query->orWhereRaw("LOWER(name) LIKE '%$q%'");
+                $query->orWhere([
+                    'ci' => $q,
+                ]);
+            });
+
+            return $usuarioList->paginate(20); 
+        } 
+        
+        return [
+            "data" => [],
+            "message" => "Ingrese nombre o ci del usuario"
+        ];
     }
 
 
@@ -61,7 +85,8 @@ class UsuarioController extends Controller
         $usuario->assignRole($rol);    
     
         return [
-            'message' => 'Rol asignado correctamente'
+            'message' => 'Rol asignado correctamente',
+            'data' => $usuario
         ];
     }
 
@@ -143,6 +168,7 @@ class UsuarioController extends Controller
             ], 500);
         }
 
+        $usuario->delete();
         return [
             'data' => $usuario,
             'message' => 'Usuario eliminado correctamente'

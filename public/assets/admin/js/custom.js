@@ -279,10 +279,133 @@ $('document').ready(function(){
 	});
 
 	
-	
-    // Campos que utiizan select2, por defecto
-    //$('.select2-class').select2();
-	
+	   
+    // Lista todas las fase de un proyecto y los inserta en un 
+    // <select name="id_fase">
+    $("select[name=id_proyecto]").change(function(){
+        let proyectoId = $(this).val();
 
+        $.ajax({
+            type: 'GET',
+            url: `${API}/fases?id_proyecto=${proyectoId}`,
+            headers : {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            success: function(response){
+                $('select[name=id_fase]').html(`
+                    <option value="--">
+                            --
+                    </option>
+                `);
+
+                let data = response.data;
+                let faseList = data['data'];
+                faseList.forEach(function(element){
+                    $('select[name=id_fase]').append(`
+                        <option value="${element.id}">
+                            ${element.nombre}
+                        </option>
+                    `);
+                });
+            },
+            error : function(response, textStatus, errorThrown){
+                let _errors = response.responseJSON.errors
+
+                for(let _index in _errors){
+                    console.log(_index)
+                    $.notify(_errors[_index], "warn");
+                }
+            }
+        });
+
+    });
+
+
+    // Lista todas las fase de un proyecto y los inserta en un 
+    // <select name="id_fase">
+    $("select[name=id_fase]").change(function(){
+        let faseId = $(this).val();
+
+        $.ajax({
+            type: 'GET',
+            url: `${API}/linea-base?id_fase=${faseId}`,
+            headers : {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            success: function(response){
+                $('select[name=id_lineabase]').html(`
+                    <option value="--">
+                            --
+                    </option>
+                `);
+
+                let list = response.data;
+                list.forEach(function(element){
+                    $('select[name=id_lineabase]').append(`
+                        <option value="${element.id}">
+                            ${element.nombre}
+                        </option>
+                    `);
+                });
+            },
+            error : function(response, textStatus, errorThrown){
+                let _errors = response.responseJSON.errors
+
+                for(let _index in _errors){
+                    console.log(_index)
+                    $.notify(_errors[_index], "warn");
+                }
+            }
+        });
+
+    });
+
+
+
+    // Listado de usurio en el modal
+    $('#usuario-box-modal').keyup(function(){
+        $('#usuario-listado-modal').html('');
+
+        let q = $(this).val();
+
+        $.ajax({
+            type: 'GET',
+            url: `${API}/usuarios/buscar`,
+            data : {
+                q
+            },
+            headers : {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            success: function(response){
+
+                let list = response.data;
+                list.forEach(function(element){
+                    $('#usuario-listado-modal').append(`
+                        <li class="list-group-item d-flex justify-content-between align-items-center"
+                            data-usuario="${element.id}">
+                            ${element.name}
+                            <span class="badge badge-primary badge-pill">
+                                ${element.ci}
+                            </span>
+                        </li>      
+                    `)
+                });                
+            },
+            error : function(response, textStatus, errorThrown){
+                let _errors = response.responseJSON.errors
+
+                for(let _index in _errors){
+                    console.log(_index)
+                    $.notify(_errors[_index], "warn");
+                }
+            }
+        });
+    });
     
+    
+
 })

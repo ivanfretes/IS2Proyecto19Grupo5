@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Sistema\Desarrollo;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Item;
+use App\Model\Proyecto;
+
 
 class GestionRequerimientoController extends Controller
 {
@@ -14,7 +17,12 @@ class GestionRequerimientoController extends Controller
      */
     public function index()
     {
-        //
+        $itemList = Item::simplePaginate();
+
+        return view('sistema.item.list', [
+            'itemList' => $itemList,
+            'tituloPagina' => 'Gestion de Requerimientos'
+        ]);
     }
 
     /**

@@ -15,7 +15,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarioList = User::paginate(20);
+        $usuarioList = User::simplePaginate(20);
         return view('sistema.usuario.list', [
             'usuarioList' => $usuarioList,
             'tituloPagina' => 'Listado de Usuarios'

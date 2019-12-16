@@ -4,7 +4,7 @@
         "item-1" => [
             [
                 "route" => route('sistema.gestion-de-requerimientos.index'),
-                "title" => "Historico"
+                "title" => "Gestión de Requerimientos"
             ]
         ],   
     ];

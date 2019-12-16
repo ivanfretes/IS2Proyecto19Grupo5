@@ -109,7 +109,4 @@
 
 
 
-@include('admin.cliente.cliente-listado-modal')
-	
-
 @endsection

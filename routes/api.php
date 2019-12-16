@@ -32,6 +32,18 @@ Route::prefix('/')
 			'UsuarioController@asignarRol'
 		)->name('usuarios.asignar_rol');
 
+
+		// Asignar usuario a proyecto
+		Route::post(
+			'proyectos/{id}/asignar-a-usuario', 
+			'ProyectoController@asignarProyecto'
+		)->name('usuarios.asignar_a_usuario');
+
+		Route::get(
+			'usuarios/buscar', 
+			'UsuarioController@buscar'
+		)->name('usuarios.buscar');
+
 		Route::resources([
 			'proyectos' => 'ProyectoController',
 			'usuarios' => 'UsuarioController',

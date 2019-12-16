@@ -17,7 +17,6 @@
     <table  class="table table-bordred table-custom">
         <thead>
             <tr >
-
                 <th >Nombre y Apellido</th>
                 <th class="text-center">CI</th>
                 <th >Email</th>
@@ -31,13 +30,13 @@
         			<td>
                         {{ $usuario->name }}
                     </td>
-                    <td class="text-right">5310689</td>
+                    <td class="text-right">{{ $usuario->ci }}</td>
                     <td >{{ $usuario->email }}</td>
                     
         			<td class="text-right">
         				<a href="{{ 
                             @route(
-                                'sistema.usuarios.create',
+                                'sistema.usuarios.edit',
                                  $usuario->id ) 
                             }}" class="btn Nuevo btn-primary btn-icon ">
                             Editar
@@ -54,6 +53,8 @@
         	@endforeach
         </tbody>
     </table>
+    
+    {{ $usuarioList->links() }}
 </div>   
-	
+
 @endsection

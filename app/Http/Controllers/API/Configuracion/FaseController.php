@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Configuracion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Fase;
 
 class FaseController extends Controller
 {
@@ -12,9 +13,19 @@ class FaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $proyectoId = $request->input('id_proyecto', NULL);
+        if ($proyectoId == NULL){
+            $fases = Fase::all(20);
+        } else {
+            $fases = Fase::where('id_proyecto', $proyectoId)
+                ->paginate(20);
+        }
+
+        return [
+            "data" => $fases
+        ];
     }
 
     /**
@@ -69,7 +80,23 @@ class FaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fase = Fase::find($id);
+        if (!isset($fase)){
+            return response([ 'errors' => [ 
+                'Fase no encontrada' 
+            ] ], 500);
+        }
+
+        $fase->nombre = urldecode($request->input('nombre'));
+        $fase->descripcion = urldecode($request->input('descripcion'));
+        $fase->id_proyecto = $request->input('id_proyecto');
+        $fase->estado = $request->input('estado', 'abierto');
+        $fase->save();
+
+        return [
+            "data" => $fase,
+            "message" => 'Fase editada correctamente'
+        ];
     }
 
     /**
@@ -80,6 +107,18 @@ class FaseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fase = Fase::find($id);
+        if (!isset($fase)){
+            return response([ 'errors' => [ 
+                'Fase no encontrada' 
+            ] ], 500);
+        }
+
+        $fase->delete();
+
+        return [
+            "data" => $fase,
+            "message" => 'Fase eliminada correctamente'
+        ];
     }
 }
