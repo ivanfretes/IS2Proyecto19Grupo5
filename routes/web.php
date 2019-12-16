@@ -26,16 +26,22 @@ Route::prefix('/')
 
 
 	/**
+	 * Reportes
+	 */
+	Route::get('/reportes/proyecto', 'Reporte\ReporteController@proyecto')
+		->name('reportes.proyectos');	
+	Route::get('/reportes/items', 'Reporte\ReporteController@item')
+		->name('reportes.items');	
+
+	/**
 	 * Modulo de administracion
 	 */
 	Route::namespace('Sistema\Administracion')->group(function(){
-
 		Route::resources([
 			'proyectos' => 'ProyectoController',
 			'usuarios' => 'UsuarioController',
 		]);
 	});
-
 
 
 	/**

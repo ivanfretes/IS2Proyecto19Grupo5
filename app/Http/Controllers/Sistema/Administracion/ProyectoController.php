@@ -62,13 +62,13 @@ class ProyectoController extends Controller
     public function edit($id)
     {
         $proyecto = Proyecto::find($id);
-
         if (!isset($proyecto)){
             return abort(404);
         }
 
         return view('sistema.proyecto.edit', [
             'proyecto' => $proyecto,
+            'usuario' => $proyecto->usuario,
             'tituloPagina' => 'Editar Proyecto'
         ]);
     }

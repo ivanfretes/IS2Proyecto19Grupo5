@@ -62,7 +62,15 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = User::find($id);
+        if (!isset($usuario)){
+            return abort(404);
+        }
+
+        return view('sistema.usuario.edit', [
+            'usuario' => $usuario,
+            'tituloPagina' => 'Editar Usuario'
+        ]);
     }
 
     /**

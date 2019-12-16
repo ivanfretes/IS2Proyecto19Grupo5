@@ -21,6 +21,7 @@ Route::prefix('/')
 	->namespace('API')
 	->group(function(){
 
+
 	/**
 	 * Modulo de administracion
 	 */

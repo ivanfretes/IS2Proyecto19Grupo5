@@ -49,6 +49,7 @@
     @include('sistema.permisos_roles.administracion')
     @include('sistema.permisos_roles.configuracion')
     @include('sistema.permisos_roles.desarrollo')
+    @include('sistema.permisos_roles.reporte')
 @endif
 
 

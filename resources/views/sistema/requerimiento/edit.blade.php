@@ -4,20 +4,16 @@
 
 @section('content_page')
 
-	<form action="{{ @route('api.item.update', $item->id) }}" 
+	<form action="{{ @route('api.gestion-de-requerimientos.update', $item->id) }}" 
 			  method="PUT"
 			  class="form-ajax-submit forn-with-slug" 
 			  id="proyecto-form"
 			  autocomplete="off">
 
-		<input type="hidden" name="id_aprobacion"
-					id="id_aprobacion"
-					value="{{ Auth::id() }}"/>
-	
 		<div class="row row-btn-subhead">
 		    <div class="offset-9 col-3">
 		        <button class="btn btn-success btn-block btn-main">
-		            Guardar Item
+		            Guardar Requerimiento
 		        </button>
 		    </div>
 		</div>
@@ -109,102 +105,5 @@
 		</div>			
 	</form>
 
-
-	<div class="row">
-		<div class="col-12"><hr></div>
-		<div class="col-12">
-			<h3>Modificaciones Solicitadas</h3>
-			@if(isset($requerimientoList))
-				<table class="table">
-					<td>
-						 Nombre
-					</td>
-					<td>
-						 Descripción
-					</td>
-
-					<td>
-						 Version
-					</td>
-
-					<td>
-						 Acciones
-					</td>
-					@foreach($requerimientoList as $requerimiento)
-						<tr>
-							<td>
-								 {{ $requerimiento->nombre}}
-							</td>
-							<td>
-								 {!! $requerimiento->descripcion !!}
-							</td>
-
-							<td>
-								 {!! $requerimiento->version !!}
-							</td>
-
-							<td>
-								 <button data-id="{{ $requerimiento->id }}"
-								 		class="btn btn-success">
-									Actualizar
-								 </button>
-							</td>
-						</tr>
-					@endforeach
-				</table>
-			@else
-				No se encontraron requerimientos
-			@endif
-		</div>
-	</div>
-	
-
-	<script type="text/javascript">
-		$('button').click(function(){
-			let requerimientoId = $(this).attr('data-id');
-
-			if(typeof requerimientoId != 'undefined'){
-				$.ajax({
-		            type: 'POST',
-		            url: `${API}/proyectos/${proyectoId}/asignar-a-usuario`,
-		            data : JSON.stringify({
-		                id_usuario : usuarioId
-		            }),
-		            headers : {
-		                "Content-Type": "application/json",
-		                "Accept": "application/json",
-		            },
-		            success: function(response){
-						if(response.message != null){
-		                    $.notify(response.message, "success");
-							
-						} else {
-		                    $.notify("Guardado correctamente", "success");
-		                }
-
-		                let data = response.data;
-		                let usuario = data['usuario'];
-		                
-		                $('#usuario-asignado').html(`
-							Nombre: ${ usuario.name } <br>
-							CI: ${ usuario.ci } <br>
-							Correo : ${ usuario.email } <br>
-		                `)
-
-		                $('#UsuarioListModal').modal('hide');
-		            },
-		            error : function(response, textStatus, errorThrown){
-		                let _errors = response.responseJSON.errors
-
-		                for(let _index in _errors){
-		                    console.log(_index)
-		                    $.notify(_errors[_index], "warn");
-		                }
-		            }
-		        });
-			}
-			
-		})
-	</script>
 
 @endsection

@@ -24,9 +24,6 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Cerrar
         </button>
-        <button type="button" class="btn btn-primary">
-          Asignar
-        </button>
       </div>
     </div>
   </div>

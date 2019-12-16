@@ -1,4 +1,4 @@
-@php
++@php
     $fechaInicio  = NULL;
     $fechaFin = NULL;
 
@@ -19,10 +19,7 @@
 @endphp
 
 @extends('sistema.template.template')
-
-
 @section('content_page')
-
 @include('sistema.usuario.modal.usuario-list')
 
 <form action="{{ @route('api.proyectos.update', $proyecto->id) }}" 
@@ -90,23 +87,17 @@
 			</select>
 		</div>
 
-		<div class="form-group">
-			<label for="estado">Estado</label>
-			<select name="estado" class="form-control">
-				<option value="--">--</option>
-				@foreach($estadosAoC as $estado)
-					@if($estado == $proyecto->estado)
-						<option value="{{ $estado }}"
-							selected=yes>
-							{{  ucwords($estado) }}
-						</option>
-					@else
-						<option value="{{ $estado }}">
-							{{  ucwords($estado) }}
-						</option>
-					@endif
-				@endforeach
-			</select>
+		<div class="row">
+			<div class="col-12"><hr></div>
+			<div class="col-12" id="usuario-asignado">
+				
+				@if(isset($usuario))
+					Nombre: {{ $usuario->name }} <br>
+					CI: {{ $usuario->ci }} <br>
+					Correo : {{ $usuario->email }} <br>
+				@endif
+			</div>
+			
 		</div>
 	</div>			
 </form>
@@ -138,22 +129,16 @@
                     $.notify("Guardado correctamente", "success");
                 }
 
+                let data = response.data;
+                let usuario = data['usuario'];
+                
+                $('#usuario-asignado').html(`
+					Nombre: ${ usuario.name } <br>
+					CI: ${ usuario.ci } <br>
+					Correo : ${ usuario.email } <br>
+                `)
+
                 $('#UsuarioListModal').modal('hide');
-
-
-
-                //let list = response.data;
-                // list.forEach(function(element){
-                //     $('#usuario-listado-modal').append(`
-                //         <li class="list-group-item d-flex justify-content-between align-items-center"
-                //             data-usuario="${element.id}">
-                //             ${element.name}
-                //             <span class="badge badge-primary badge-pill">
-                //                 ${element.ci}
-                //             </span>
-                //         </li>      
-                //     `)
-                // });                
             },
             error : function(response, textStatus, errorThrown){
                 let _errors = response.responseJSON.errors

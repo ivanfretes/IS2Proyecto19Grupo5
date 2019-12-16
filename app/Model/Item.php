@@ -19,4 +19,16 @@ class Item extends Model
 			'id'
 		);	
 	}
+
+
+	/**
+	 * Listado de requerimientos / hitoricos de un item
+	 */
+	public function requerimientos(){
+		return $this->hasMany(
+			'App\Model\GestionRequerimiento',
+			'id_item',
+			'id'
+		);	
+	}
 }

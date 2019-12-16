@@ -75,9 +75,6 @@ class ItemController extends Controller
             ], 404);
         }
 
-        $lineaBase->count();
-        
-
         $item->nombre = urldecode($request->input('nombre'));
         $item->descripcion = urldecode($request->input('descripcion'));
         $item->id_lineabase = $lineaBaseId;

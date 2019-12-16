@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Item;
 use App\Model\Proyecto;
-
+use App\Model\LineaBase;
+use App\Model\GestionRequerimiento;
+use Illuminate\Support\Facades\Auth;
 
 class GestionRequerimientoController extends Controller
 {
@@ -19,7 +21,7 @@ class GestionRequerimientoController extends Controller
     {
         $itemList = Item::simplePaginate();
 
-        return view('sistema.item.list', [
+        return view('sistema.requerimiento.list', [
             'itemList' => $itemList,
             'tituloPagina' => 'Gestion de Requerimientos'
         ]);
@@ -65,7 +67,40 @@ class GestionRequerimientoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::find($id);
+        if (!isset($item)){
+            return abort(404);
+        }
+
+        //  Visualizacion de Campos Padres
+        $proyectoSeleccionado = NULL;
+        $faseSeleccionada = NULL;
+        $lineaBaseSeleccionada = NULL;
+
+        $proyectoList = Proyecto::all();
+        $faseList = [];
+        $lineaBaseList = [];
+
+        if (isset($item->lineabase)){
+            $lineaBaseSeleccionada = $item->lineabase;
+            $faseSeleccionada = $lineaBaseSeleccionada->fase;
+            $proyectoSeleccionado = $faseSeleccionada->proyecto;
+
+            // Listado de lineas Bases de una fase
+            $lineaBaseList = LineaBase::where('id_fase', $faseSeleccionada->id)->get();
+        }
+
+
+        return view('sistema.requerimiento.edit', [
+            'item' => $item,
+            'proyectoList' => $proyectoList,
+            'tituloPagina' => 'Editar Requerimiento',
+
+            'proyectoSeleccionado' => $proyectoSeleccionado,
+            'faseSeleccionada' => $faseSeleccionada,
+            'lineaBaseSeleccionada' => $lineaBaseSeleccionada,
+            'lineaBaseList' => $lineaBaseList
+        ]);
     }
 
     /**

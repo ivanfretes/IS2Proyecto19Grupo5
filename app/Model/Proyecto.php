@@ -20,4 +20,16 @@ class Proyecto extends Model
 			'id'
 		);			
 	}
+
+
+	/**
+	 * Listado de fases de un proyecto
+	 */
+	public function usuario(){
+		return $this->belongsTo(
+			'App\User',
+			'id_usuario',
+			'id'
+		);			
+	}
 }

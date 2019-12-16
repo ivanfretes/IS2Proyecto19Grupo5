@@ -20,4 +20,16 @@ class Fase extends Model
 		);	
 	}
 
+
+	/**
+	 * Listado de lineas base de una fase
+	 */
+	public function lineasbases(){
+		return $this->belongsTo(
+			'App\Model\LineaBase',
+			'id_fase',
+			'id'
+		);	
+	}
+
 }

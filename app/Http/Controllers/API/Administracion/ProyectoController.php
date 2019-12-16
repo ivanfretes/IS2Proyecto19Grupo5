@@ -45,13 +45,16 @@ class ProyectoController extends Controller
             ],500);
         }
 
-        // Buscar el proyecto
+        // Si todo va bien, ingresa al proyecto y actualiza el usuario
         $proyecto =  Proyecto::find($id);
         $proyecto->id_usuario = $usuario->id;
         $proyecto->save();
 
         return [
-            'data' => $proyecto,
+            'data' => [
+                "proyecto" => $proyecto,
+                "usuario" => $proyecto->usuario
+            ],
             'message' => 'Proyecto Asignado correctamente'
         ];
     }
